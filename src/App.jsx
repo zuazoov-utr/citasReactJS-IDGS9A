@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './css/App.css';
+import Formulario from './components/Formulario.jsx';
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -16,6 +17,12 @@ function App() {
       >
         <span className='btn-texto-nueva-cita'>Nueva Cita</span>
       </button>
+      {visible && (
+        <Formulario
+          visible={visible}
+          setVisible={setVisible}
+        />
+      )}
     </main>
   )
 }
