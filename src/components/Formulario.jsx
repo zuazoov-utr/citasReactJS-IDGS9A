@@ -30,6 +30,27 @@ const Formulario = ({
      *  - textarea
      */
 
+    const handleCita = (e) => {
+        e.preventDefault();
+
+        // Validation - All fields are required
+        if ([nombrePaciente.trim(), nombrePropietario.trim(), correo.trim(),
+        telefono.trim(), fechaAlta, sintomas.trim()].includes('')) {
+            console.log('Necesitas llenar todos los campos');
+            return;
+        }
+
+        const pacienteAlta = {
+            nombrePaciente,
+            nombrePropietario,
+            correo,
+            telefono,
+            fechaAlta,
+            sintomas
+        };
+        console.log(pacienteAlta)
+    }
+
     return (
         <div className="modal-overlay" role="dialog" aria-modal="true">
             <div className="modal-content">
@@ -42,7 +63,7 @@ const Formulario = ({
                         <span className='btn-texto-cerrar-modal'>Cerrar</span>
                     </button>
 
-                    <form>
+                    <form onSubmit={(e) => handleCita(e)}>
                         <div className='formulario-campo'>
                             <label
                                 htmlFor="paciente"
@@ -113,6 +134,25 @@ const Formulario = ({
                                 onChange={(e) => setFechaAlta(e.target.value)}
                             />
                         </div>
+                        <div className='formulario-campo'>
+                            <label
+                                htmlFor="sintomas"
+                                className='formulario-label'
+                            >Sintomas</label>
+                            <textarea
+                                id='sintomas'
+                                className='formulario-input'
+                                placeholder='Sintomas (Descripcion)'
+                                value={sintomas}
+                                onChange={(e) => setSintomas(e.target.value)}
+                                rows={4}
+                            ></textarea>
+                        </div>
+
+                        <button
+                            type='submit'
+                            className='formulario-btn-submit'
+                        >Agregar Paciente</button>
                     </form>
                 </div>
             </div>
