@@ -3,7 +3,9 @@ import { useState } from 'react';
 
 const Formulario = ({
     visible,
-    setVisible
+    setVisible,
+    pacientes,
+    setPacientes
 }) => {
     const [nombrePaciente, setNombrePaciente] = useState('');
     const [nombrePropietario, setNombrePropietario] = useState('');
@@ -36,19 +38,26 @@ const Formulario = ({
         // Validation - All fields are required
         if ([nombrePaciente.trim(), nombrePropietario.trim(), correo.trim(),
         telefono.trim(), fechaAlta, sintomas.trim()].includes('')) {
-            console.log('Necesitas llenar todos los campos');
+            window.alert('Error: Todos los campos son obligatorios');
             return;
         }
 
         const pacienteAlta = {
-            nombrePaciente,
-            nombrePropietario,
-            correo,
-            telefono,
+            nombrePaciente: nombrePaciente.trim(),
+            nombrePropietario: nombrePropietario.trim(),
+            correo: correo.trim(),
+            telefono: telefono.trim(),
             fechaAlta,
-            sintomas
+            sintomas: sintomas.trim()
         };
         console.log(pacienteAlta)
+
+        // Add id
+        pacienteAlta.id = Date.now();
+        console.log(pacienteAlta)
+        // Guardar mi objeto de pacienteAlta ???
+        setPacientes([...pacientes, pacienteAlta]);
+        setVisible(false);
     }
 
     return (
