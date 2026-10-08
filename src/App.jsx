@@ -25,7 +25,13 @@ function App() {
         <span className='btn-texto-nueva-cita'>Nueva Cita</span>
       </button>
 
-      <Paciente />
+      {pacientes.map((paciente) => (
+        <Paciente
+          setVisible={setVisible}
+          pacientes={pacientes}
+          paciente={paciente}
+        />
+      ))}
 
       {visible && (
         <Formulario
